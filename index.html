@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: black;
+            width: 100%;
+            height: 100vh;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @font-face {
+            font-family: 'RuslanDisplay';
+            src: url('font/RuslanDisplay.ttf');
+        }
+
+        @font-face {
+            font-family: "ribeye-regular";
+            src: url("font/Ribeye-Regular.ttf");
+        }
+
+        #background-img {
+            position: fixed;
+            filter: blur(3px);
+        }
+
+        .date_time {
+            display: inline-block;
+            /* background-color: red; */
+            position: relative;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #name {
+            font-size: 32px;
+            color: white;
+            font-family: "ruslandisplay";
+            /* background-color: rgb(27, 27, 27); */
+            line-height: 100px;
+        }
+
+        #time_box {
+            font-family: "ribeye-regular";
+            font-size: 180px;
+            color: maroon;
+            /* background-color: gold; */
+            line-height: 160px;
+            text-shadow: 5px 5px 10px rgb(65, 0, 0);
+        }
+
+        #time_box #am-pm {
+            font-size: 48px;
+            color: white;
+            padding: 0 20px;
+            /* margin-left: -30px; */
+        }
+
+        .date {
+            position: relative;
+            left: 50%;
+            color: white;
+        }
+
+        #date {
+            font-size: 32px;
+            font-family: "RuslanDisplay";
+        }
+
+        #divider {
+            width: 100%;
+            height: 4px;
+            background-color: white;
+            display: inline-block;
+        }
+
+        #day {
+            font-size: 32px;
+            font-family: "ruslandisplay";
+        }
+
+        #watch-sec {
+            width: 600px;
+            height: 600px;
+            /* background-color: orangered; */
+            position: fixed;
+            top: 53%;
+            left: 51%;
+            transform: translateY(-50%);
+            border-radius: 50%;
+        }
+
+        #watch-frame {
+            width: 100%;
+            height: 100%;
+            /* background-color: aliceblue; */
+            border-radius: 50%;
+            border: 15px solid maroon;
+            border-left: 0;
+            border-bottom: 0;
+        }
+
+        .nib_01 {
+            width: 10px;
+            height: 300px;
+            /* background-color: white; */
+            position: absolute;
+            left: calc(50% - 5px);
+            top: 0%;
+            animation: min 60s infinite linear;
+            transform-origin: bottom;
+        }
+
+        .nib_02 {
+            animation: sec 1s infinite linear;
+        }
+
+        #nib_svg_02 {
+            position: relative;
+            left: calc(50% - 16px);
+            transform: scale(.5);
+        }
+
+        @keyframes min {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes sec {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #nib_svg {
+            /* background-color: gold; */
+            position: relative;
+            top: -80px;
+            /* opacity: .5; */
+            left: 50%;
+            transform: translateX(-50%);
+
+        }
+
+        .scru {
+            width: 45px;
+            height: 45px;
+            /* background-image: linear-gradient(rgba(255, 255, 255, 0.993), white); */
+            box-shadow: 5px 0px 5px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(90deg);
+            border-radius: 50%;
+        }
+
+        #watch-frame-02 {
+            width: 500px;
+            height: 500px;
+            background-color: maroon;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: 150px solid rgb(27, 27, 27);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            /* z-index: 99; */
+            border-left: 0;
+            border-bottom: 0;
+            /* background-color: rgb(163, 0, 0); */
+        }
+    </style>
+</head>
+
+<body>
+    <img src="img/a2.jpg" alt="" id="background-img">
+    <div id="watch-sec">
+        <div id="watch-frame"></div>
+        <div id="watch-frame-02"></div>
+        <div class="nib_01">
+            <svg width="32px" height="350px" id="nib_svg">
+                <polygon points="16,5 5,50 10,345 22,345 27,50" fill="none" stroke="rgb(100, 0,0)" stroke-width="3" />
+            </svg>
+        </div>
+        <div class="nib_01 nib_02">
+            <svg width="32px" height="350px" id="nib_svg_02">
+                <polygon points="16,5 5,50 10,345 22,345 27,50" fill="white" />
+            </svg>
+        </div>
+        <div class="scru"></div>
+    </div>
+    <div class="date_time">
+        <p id="name">hey omega</p>
+        <h1 id="time_box"><span id="time">10:25</span><span id="am-pm">am</span></h1>
+        <div class="date">
+            <p id="date">31/ june/ 2021</p>
+            <span id="divider"></span>
+            <p id="day">friday</p>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+
+
+        function minute() {
+            var minute1 = new Date().getMinutes();
+            var minutes = minute1;
+            if (minute1.toString().length == 1) {
+                minutes = "0" + minute1;
+                return minutes;
+            }
+            else {
+                return minute1;
+            }
+        }
+        function hour() {
+            var time = new Date().getHours();
+            var time_12 = time;
+            var am_pm = "am";
+            if (time > 12) {
+                time_12 = time - 12;
+                if (time_12.toString().length == 1) {
+                    time_12 = "0" + (time - 12);
+                    return [time_12, "pm"]
+                }
+            }
+            else {
+                return [time, "am"];
+            }
+        }
+
+        function months() {
+            var month = new Date().getMonth() + 1;
+            var month_name;
+
+            switch (month) {
+                case 1:
+                    month_name = "jan";
+                    break;
+                case 2:
+                    month_name = "feb";
+                    break;
+                case 3:
+                    month_name = "mar";
+                    break;
+                case 4:
+                    month_name = "apr";
+                    break;
+                case 5:
+                    month_name = "may";
+                    break;
+                case 6:
+                    month_name = "jun";
+                    break;
+                case 7:
+                    month_name = "jul";
+                    break;
+                case 8:
+                    month_name = "aug";
+                    break;
+                case 9:
+                    month_name = "sep";
+                    break;
+                case 10:
+                    month_name = "oct";
+                    break;
+                case 11:
+                    month_name = "num";
+                    break;
+                case 12:
+                    month_name = "dec";
+                    break;
+                default:
+                    break;
+            }
+            return month_name;
+        }
+
+        function week() {
+            var week = new Date().getDay() + 1;
+            var week_name;
+            switch (week) {
+                case 1:
+                    week_name = "sunday";
+                    break;
+                case 2:
+                    week_name = "monday";
+                    break;
+                case 3:
+                    week_name = "tuesday";
+                    break;
+                case 4:
+                    week_name = "wednesday";
+                    break;
+                case 5:
+                    week_name = "thursday";
+                    break;
+                case 6:
+                    week_name = "friday";
+                    break;
+                case 7:
+                    week_name = "saturday";
+                    break;
+                default:
+                    break;
+            }
+            return week_name;
+        }
+        function date(){
+            var date = new Date().getDate();
+            if (date.toString().length == 1) {
+                return "0" + date;
+            }
+            else{
+                return date;
+            }
+        }
+
+        setInterval(() => {
+            document.getElementById("time").innerHTML = hour()[0] + ":" + minute();
+            document.getElementById("am-pm").innerHTML = hour()[1];
+            document.getElementById("date").innerHTML = date() + "/ " + months() + "/ " + new Date().getFullYear();
+            document.getElementById("day").innerHTML = week();
+        }, 1000);
+
+    </script>
+</body>
+
+</html>
